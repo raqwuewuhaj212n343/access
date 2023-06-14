@@ -1,0 +1,101 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user
+  template:
+    metadata:
+      labels:
+        app: user
+    spec:
+      containers:
+        - name: user
+          image: seaclub/user:latest
+          env:
+            - name: PORT
+              value: '5000'
+            - name:  NODE_ENV
+              value: 'test'
+            - name: MONGO_URI
+              value: 'mongodb://user-mongo-srv:27017/users'
+            - name: RABBITMQ_URI
+              value: 'amqp://rabbitmq-srv:5672'
+            - name: SALT
+              value: '8'
+            - name: PASSWORD_SET_EMAIL
+              value: abdulshiha92@gmail.com
+            - name: GOOGLE_CALLBACK_URL
+              value: 'https://www.seaclub-prod.online/api/v1/users/auth/google/callback'
+            - name: LINKEDIN_CALLBACK_URL
+              value: 'https://www.seaclub-prod.online/api/v1/users/auth/organizations/linkedin/callback'
+            - name: LINKEDIN_OAUTH_CALLBACK_URL
+              value: 'https://www.seaclub-prod.online/api/v1/users/auth/linkedin/callback'
+            - name: FACEBOOK_CALLBACK_URL
+              value: 'https://www.seaclub-prod.online/api/v1/users/auth/facebook/callback'
+            - name:  OAUTH_SUCCESS_REDIRECT_URL
+              value: 'http://localhost:3000/profile/'
+            - name:  OAUTH_FAILURE_REDIRECT_URL
+              value: 'http://localhost:3000/login/'
+            - name: ACCESS_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: access-token
+                  key: ACCESS_TOKEN
+            - name: SENDGRID_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: sendgrid-api-key
+                  key: SENDGRID_API_KEY
+            - name: GOOGLE_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: google-client-id
+                  key: GOOGLE_CLIENT_ID
+            - name: GOOGLE_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: google-client-secret
+                  key: GOOGLE_CLIENT_SECRET
+            - name: LINKEDIN_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: linkedin-key
+                  key: LINKEDIN_KEY
+            - name: LINKEDIN_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: linkedin-secret
+                  key: LINKEDIN_SECRET
+            - name: FACEBOOK_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: facebook-key
+                  key: FACEBOOK_KEY
+            - name: FACEBOOK_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: facebook-secret
+                  key: FACEBOOK_SECRET
+            - name: SESSION_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: session-secret
+                  key: SESSION_SECRET
+                  
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-srv
+spec:
+  selector:
+    app: user
+  ports:
+    - name: user
+      protocol: TCP
+      port: 5000
+      targetPort: 5000

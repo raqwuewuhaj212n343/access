@@ -1,0 +1,1889 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "seaclub API",
+    "description": "All of seaclub microservices API definitions",
+    "version": "1.0.0"
+  },
+  "externalDocs": {
+    "description": "Github repository",
+    "url": "https://github.com/Seaclub-Inc/seaclub-backend-microservices.git"
+  },
+  "servers": [
+    {
+      "url": "https://www.seaclub-prod.online/api/v1/"
+    },
+    {
+      "url": "{protocol}://localhost:{port}/api/v1/",
+      "variables": {
+        "port": {
+          "default": "5001"
+        },
+        "protocol": {
+          "enum": [
+            "http",
+            "https"
+          ],
+          "default": "http"
+        }
+      }
+    }
+  ],
+  "tags": [
+    {
+      "name": "templates"
+    },
+    {
+      "name": "users"
+    }
+  ],
+  "paths": {
+    "/templates": {
+      "get": {
+        "tags": [
+          "templates"
+        ],
+        "summary": "get all user's created templates",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "templates": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/x-schemas/Template"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/templates/{id}": {
+      "get": {
+        "tags": [
+          "templates"
+        ],
+        "summary": "get a template by it's id",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "templates": {
+                      "oneOf": [
+                        {
+                          "$ref": "#/components/schemas/TeamTemplate"
+                        },
+                        {
+                          "$ref": "#/components/schemas/AboutUsTemplate"
+                        },
+                        {
+                          "$ref": "#/components/schemas/PortfolioTemplate"
+                        }
+                      ],
+                      "discriminator": {
+                        "propertyName": "section"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "templates"
+        ],
+        "summary": "delete a template by it's id",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/id"
+          }
+        ],
+        "responses": {
+          "204": {
+            "$ref": "#/components/responses/204"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/templates/{section}": {
+      "post": {
+        "tags": [
+          "templates"
+        ],
+        "summary": "create a new template",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "section",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "team",
+                "about-us",
+                "portfolio"
+              ]
+            },
+            "required": true,
+            "description": "the section to which to fall under"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "template": {
+                      "$ref": "#/components/x-schemas/Template"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/templates/{section}/{id}": {
+      "put": {
+        "tags": [
+          "templates"
+        ],
+        "summary": "update a template",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/id"
+          },
+          {
+            "in": "path",
+            "name": "section",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "team",
+                "about-us",
+                "portfolio"
+              ]
+            },
+            "required": true,
+            "description": "the section to which to fall under"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "template": {
+                      "$ref": "#/components/x-schemas/Template"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/users/signup": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "signup with email and password and returns auth cookie",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "user": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid email or password",
+            "allOf": [
+              {
+                "$ref": "#/components/responses/400"
+              }
+            ]
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/users/login": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "logs in and returns auth cookie",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "user": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid login credentials",
+            "allOf": [
+              {
+                "$ref": "#/components/responses/400"
+              }
+            ]
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/users/password-reset-link/{email}": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "request password reset link",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "email",
+            "schema": {
+              "type": "string",
+              "example": "seaclub@mail.com"
+            },
+            "required": true,
+            "description": "email address"
+          }
+        ],
+        "responses": {
+          "204": {
+            "$ref": "#/components/responses/204"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/users/password-reset-link/{token}": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "reset password",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "token",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "token obtained from reset link"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "$ref": "#/components/responses/204"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/users/email-otp/{email}": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "will send otp to email address for verification",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "email",
+            "schema": {
+              "type": "string",
+              "example": "seaclub@mail.com"
+            },
+            "required": true,
+            "description": "email address"
+          }
+        ],
+        "responses": {
+          "204": {
+            "$ref": "#/components/responses/204"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/users/validate-email-otp": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "verify email via given otp",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "otp": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "$ref": "#/components/responses/204"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/users/password-reset": {
+      "patch": {
+        "tags": [
+          "users"
+        ],
+        "summary": "reset password while signed in (in settings)",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "newPassword": {
+                    "type": "string"
+                  },
+                  "currentPassword": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "$ref": "#/components/responses/204"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/users/auth/google": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "will redirect to google for authentication",
+        "responses": {
+          "204": {
+            "$ref": "#/components/responses/204"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/users/auth/google/callback": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Will authenticate a user via google (cookie)",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/users/auth/linkedin": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "will redirect to linkedIn for authentication",
+        "responses": {
+          "204": {
+            "$ref": "#/components/responses/204"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/users/auth/linkedin/callback": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Will authenticate a user via linkedIn (cookie)",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/users/auth/facebook": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "will redirect to linkedIn for authentication",
+        "responses": {
+          "204": {
+            "$ref": "#/components/responses/204"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/users/auth/facebook/callback": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Will authenticate a user via facebook (cookie)",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/users/auth/organizations/linkedin": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "organizationId",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "vanityName",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "$ref": "#/components/responses/204"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/users/auth/organizations/linkedin/callback": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/users/web3/signup": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "signup by providing wallet details",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "address": {
+                    "type": "string"
+                  },
+                  "provider": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "user": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid address",
+            "allOf": [
+              {
+                "$ref": "#/components/responses/500"
+              }
+            ]
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/users/web3/login": {
+      "post": {
+        "summary": "Logs in and returns the authentication cookie",
+        "tags": [
+          "users"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "hash": {
+                    "type": "string"
+                  },
+                  "address": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "404": {
+            "allOf": [
+              {
+                "$ref": "#/components/responses/500"
+              }
+            ],
+            "description": "Not found"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/users/web3/login-hash/{address}": {
+      "get": {
+        "summary": "retrieve wallet hash",
+        "tags": [
+          "users"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/address"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "hash": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid address",
+            "allOf": [
+              {
+                "$ref": "#/components/responses/500"
+              }
+            ]
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/users/web3/activate-wallet/{address}": {
+      "patch": {
+        "summary": "will change default wallet",
+        "tags": [
+          "users"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/address"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "user": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/users/web3/add-wallet": {
+      "patch": {
+        "summary": "will change default wallet",
+        "tags": [
+          "users"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "address": {
+                    "type": "string"
+                  },
+                  "provider": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "user": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid address",
+            "allOf": [
+              {
+                "$ref": "#/components/responses/500"
+              }
+            ]
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/users/web3/remove-wallet/{address}": {
+      "delete": {
+        "summary": "will change default wallet",
+        "tags": [
+          "users"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/address"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "user": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid address",
+            "allOf": [
+              {
+                "$ref": "#/components/responses/500"
+              }
+            ]
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/users/account/activate": {
+      "patch": {
+        "tags": [
+          "users"
+        ],
+        "summary": "activate account if deactivated",
+        "responses": {
+          "204": {
+            "$ref": "#/components/responses/204"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/users/account/deactivate": {
+      "patch": {
+        "tags": [
+          "users"
+        ],
+        "summary": "deactivate account for specific period/duration",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "password": {
+                    "type": "string"
+                  },
+                  "duration": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "$ref": "#/components/responses/204"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/users/account/settings/notification": {
+      "patch": {
+        "tags": [
+          "users"
+        ],
+        "summary": "update user subscribed notifications",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "emailNotifications": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "pushNotifications": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "example": [
+                      "platform",
+                      "profile",
+                      "news",
+                      "tips"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "$ref": "#/components/responses/204"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/users/account": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "get user details",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "user": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "users"
+        ],
+        "summary": "delete user account",
+        "responses": {
+          "204": {
+            "$ref": "#/components/responses/204"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/users/account/push-notification": {
+      "put": {
+        "tags": [
+          "users"
+        ],
+        "summary": "add a push subscription",
+        "responses": {
+          "204": {
+            "$ref": "#/components/responses/204"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "users"
+        ],
+        "summary": "remove a push subscription",
+        "responses": {
+          "204": {
+            "$ref": "#/components/responses/204"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/users/company": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "get a user's company (only if agency)",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "company": {
+                      "$ref": "#/components/x-schemas/Company"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "users"
+        ],
+        "summary": "edit user's company details",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/x-schemas/Company"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "company": {
+                      "$ref": "#/components/x-schemas/Company"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "x-schemas": {
+      "_id-write": {
+        "type": "string",
+        "format": "objectId",
+        "example": "507f1f77bcf86cd799439011"
+      },
+      "url": {
+        "type": "string",
+        "format": "http",
+        "example": "https://seaclub.item.com"
+      },
+      "file": {
+        "type": "string",
+        "format": "binary"
+      },
+      "_id": {
+        "type": "string",
+        "format": "objectId",
+        "readOnly": true,
+        "example": "507f1f77bcf86cd799439011"
+      },
+      "date-time": {
+        "type": "string",
+        "format": "date-time",
+        "readOnly": true
+      },
+      "Address": {
+        "type": "object",
+        "properties": {
+          "country": {
+            "type": "string"
+          },
+          "stateOrProvince": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "area": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "country",
+          "stateOrProvince",
+          "city",
+          "area"
+        ]
+      },
+      "Settings": {
+        "type": "object",
+        "properties": {
+          "primaryEmail": {
+            "type": "number"
+          },
+          "primaryWallet": {
+            "type": "number"
+          },
+          "language": {
+            "type": "string"
+          },
+          "currency": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "code": {
+                "type": "string"
+              }
+            }
+          },
+          "emailNotifications": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "platform",
+                "profile",
+                "news",
+                "tips"
+              ]
+            },
+            "example": [
+              "platform"
+            ]
+          },
+          "pushNotifications": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "platform",
+                "profile",
+                "news",
+                "tips"
+              ]
+            },
+            "example": [
+              "profile"
+            ]
+          }
+        }
+      },
+      "Template": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "$ref": "#/components/x-schemas/_id"
+          },
+          "userId": {
+            "$ref": "#/components/x-schemas/_id"
+          },
+          "selected": {
+            "type": "integer"
+          },
+          "description": {
+            "type": "string"
+          },
+          "section": {
+            "readOnly": true,
+            "type": "string",
+            "enum": [
+              "team",
+              "about-us",
+              "portfolio"
+            ],
+            "example": "team"
+          },
+          "createdAt": {
+            "$ref": "#/components/x-schemas/date-time"
+          },
+          "updatedAt": {
+            "$ref": "#/components/x-schemas/date-time"
+          }
+        },
+        "required": [
+          "userId",
+          "selected",
+          "description",
+          "section"
+        ]
+      },
+      "Company": {
+        "type": "object",
+        "properties": {
+          "bannerURL": {
+            "type": "string"
+          },
+          "companySize": {
+            "type": "integer"
+          },
+          "description": {
+            "type": "string"
+          },
+          "industry": {
+            "type": "string"
+          },
+          "languages": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "location": {
+            "$ref": "#/components/x-schemas/Address"
+          },
+          "logoURL": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "targetLocations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/x-schemas/Address"
+            }
+          },
+          "timezones": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "min": -11,
+              "max": 12
+            }
+          },
+          "services": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "category": {
+                  "type": "string",
+                  "exampe": "blockchain"
+                },
+                "percentage": {
+                  "type": "number",
+                  "exampe": 100
+                }
+              }
+            }
+          }
+        }
+      },
+      "WalletAddress": {
+        "type": "string",
+        "example": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+      }
+    },
+    "parameters": {
+      "id": {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/x-schemas/_id"
+        }
+      },
+      "address": {
+        "name": "address",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/x-schemas/WalletAddress"
+        }
+      },
+      "page": {
+        "in": "query",
+        "required": true,
+        "name": "page",
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "perPage": {
+        "in": "query",
+        "required": true,
+        "name": "page",
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "search": {
+        "name": "search",
+        "in": "query",
+        "description": "search is done in title or description",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "subscription": {
+        "in": "query",
+        "required": true,
+        "name": "subscription",
+        "schema": {
+          "$ref": "#/components/x-schemas/url"
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "success ( no response body )"
+      },
+      "400": {
+        "description": "bad request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "errors": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "invalid token",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "403": {
+        "description": "not authorized",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "errors": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "server error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "errors": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "$ref": "#/components/x-schemas/_id"
+          },
+          "provider": {
+            "type": "string",
+            "example": "facebook"
+          },
+          "company": {
+            "$ref": "#/components/x-schemas/Company"
+          },
+          "createdAt": {
+            "$ref": "#/components/x-schemas/date-time"
+          },
+          "pushSubscriptions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "emails": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "address": {
+                  "type": "string",
+                  "example": "john@gmail.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "sd67s5$%%^#EREFDDGH@&#*djh"
+                },
+                "otp": {
+                  "type": "integer",
+                  "readOnly": true
+                },
+                "otpExpiry": {
+                  "$ref": "#/components/x-schemas/date-time"
+                },
+                "verified": {
+                  "type": "boolean",
+                  "readOnly": true
+                }
+              }
+            }
+          },
+          "web3Wallets": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "provider": {
+                  "type": "string",
+                  "example": "metamask"
+                },
+                "address": {
+                  "$ref": "#/components/x-schemas/WalletAddress"
+                }
+              }
+            }
+          },
+          "settings": {
+            "$ref": "#/components/x-schemas/Settings"
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "accountType": {
+            "type": "string",
+            "enum": [
+              "online",
+              "offline",
+              "away"
+            ],
+            "example": "agency"
+          },
+          "nonce": {
+            "type": "string",
+            "readOnly": true
+          },
+          "deletedAt": {
+            "$ref": "#/components/x-schemas/date-time"
+          },
+          "updatedAt": {
+            "$ref": "#/components/x-schemas/date-time"
+          },
+          "deactivateUntil": {
+            "type": "number"
+          }
+        }
+      },
+      "TeamTemplate": {
+        "allOf": [
+          {
+            "$ref": "#/components/x-schemas/Template"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "team": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string"
+                    },
+                    "imageURL": {
+                      "$ref": "#/components/x-schemas/url"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "AboutUsTemplate": {
+        "allOf": [
+          {
+            "$ref": "#/components/x-schemas/Template"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "string"
+              },
+              "bannerURL": {
+                "$ref": "#/components/x-schemas/url"
+              },
+              "secondaryTitle": {
+                "type": "string"
+              },
+              "list": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "paragraph": {
+                      "type": "string"
+                    },
+                    "imageURL": {
+                      "$ref": "#/components/x-schemas/url"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "PortfolioTemplate": {
+        "allOf": [
+          {
+            "$ref": "#/components/x-schemas/Template"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "string"
+              },
+              "logoURL": {
+                "$ref": "#/components/x-schemas/url"
+              },
+              "secondaryTitle": {
+                "type": "string"
+              },
+              "secondaryDescription": {
+                "type": "string"
+              },
+              "banner": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string"
+                  },
+                  "imageURL": {
+                    "$ref": "#/components/x-schemas/url"
+                  }
+                }
+              },
+              "list": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "paragraph": {
+                      "type": "string"
+                    },
+                    "imageURL": {
+                      "$ref": "#/components/x-schemas/url"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "securitySchemes": {
+      "cookieAuth": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "token"
+      }
+    }
+  },
+  "security": [
+    {
+      "cookieAuth": []
+    }
+  ]
+}

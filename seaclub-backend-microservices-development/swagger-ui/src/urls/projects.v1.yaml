@@ -1,0 +1,486 @@
+openapi: 3.0.3
+info:
+  title: seaclub API
+  description: All of seaclub microservices API definitions
+  version: 1.0.0
+externalDocs:
+  description: Github repository
+  url: https://github.com/Seaclub-Inc/seaclub-backend-microservices.git
+servers:
+  - url: "https://www.seaclub-prod.online/api/v1/"
+  - url: "{protocol}://localhost:{port}/api/v1/"
+    variables:
+      port:
+        default: '5001'
+      protocol:
+        enum:
+          - http
+          - https
+        default: http
+tags:
+  - name: projects
+paths:
+  /projects:
+    get:
+      tags:
+        - projects
+      summary: get all user's created projects
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  projects:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Project'
+        '500':
+          $ref: '#/components/responses/500'
+    post:
+      tags:
+        - projects
+      summary: create a new user project
+      requestBody:
+          $ref: '#/components/requestBodies/Project'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '500':
+          $ref: '#/components/responses/500'
+  /projects/{id}:
+    patch:
+      tags:
+        - projects
+      summary: update a project by it's id
+      parameters:
+          - $ref: '#/components/parameters/id'
+      requestBody:
+          $ref: '#/components/requestBodies/Project'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  templates:
+                    oneOf:
+                    - $ref: '#/components/schemas/TeamTemplate'
+                    - $ref: '#/components/schemas/AboutUsTemplate'
+                    - $ref: '#/components/schemas/PortfolioTemplate'
+                    discriminator:
+                      propertyName: section
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+    get:
+      tags:
+        - projects
+      summary: get a project by it's id
+      parameters:
+          - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  project:
+                    $ref: '#/components/schemas/Project'
+                    discriminator:
+                      propertyName: section
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+    delete:
+      tags:
+        - projects
+      summary: delete a project by it's id
+      parameters:
+          - $ref: '#/components/parameters/id'
+      responses:
+        '204':
+          $ref: '#/components/responses/204'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+components:
+  x-schemas:
+    _id-write:
+      type: string
+      format: objectId
+      example: 507f1f77bcf86cd799439011
+    url:
+      type: string
+      format: http
+      example: 'https://seaclub.item.com'
+    file:
+      type: string
+      format: binary
+    _id:
+      type: string
+      format: objectId
+      readOnly: true
+      example: 507f1f77bcf86cd799439011
+    date-time:
+      type: string
+      format: date-time
+      readOnly: true
+    Address:
+      type: object
+      properties:
+        country:
+          type: string
+        stateOrProvince:
+          type: string
+        city:
+          type: string
+        area:
+          type: string
+      required: [country,stateOrProvince,city,area]
+    Settings:
+      type: object
+      properties:
+        primaryEmail:
+          type: number
+        primaryWallet:
+          type: number
+        language:
+          type: string
+        currency:
+          type: object
+          properties:
+            name:
+              type: string
+            code:
+              type: string
+        emailNotifications:
+          type: array
+          items:
+            type: string
+            enum: [platform, profile, news, tips]
+          example: [platform]
+        pushNotifications:
+          type: array
+          items:
+            type: string
+            enum: [platform, profile, news, tips]
+          example: [profile]
+    Company:
+      type: object
+      properties:
+        bannerURL:
+          type: string
+        companySize:
+          type: integer
+        description:
+          type: string
+        industry:
+          type: string
+        languages:
+          type: array
+          items:
+            type: string
+        location:
+          $ref: '#/components/x-schemas/Address'
+        logoURL:
+          type: string
+        name:
+          type: string
+        targetLocations:
+          type: array
+          items:
+            $ref: '#/components/x-schemas/Address'
+        timezones:
+          type: array
+          items:
+            type: number
+            min: -11
+            max: 12
+        services:
+          type: array
+          items:
+            type: object
+            properties:
+              category:
+                type: string
+                exampe: blockchain
+              percentage:
+                type: number
+                exampe: 100
+    WalletAddress:
+      type: string
+      example: '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266'
+  parameters:
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/x-schemas/_id'
+    address:
+      name: address
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/x-schemas/WalletAddress'
+    page:
+      in: query
+      required: true
+      name: page
+      schema:
+        type: integer
+    perPage:
+      in: query
+      required: true
+      name: page
+      schema:
+        type: integer
+    search:
+      name: search
+      in: query
+      description: search is done in title or description
+      schema:
+        type: string
+    subscription:
+      in: query
+      required: true
+      name: subscription
+      schema:
+        $ref: '#/components/x-schemas/url'
+  requestBodies:
+    Project:
+      required: true
+      content:
+        multipart/form-data:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/Project'
+              - type: object
+                properties:
+                  showcaseImageURL:
+                    $ref: '#/components/x-schemas/file'
+                  visualURLs:
+                    type: array
+                    items:
+                      $ref: '#/components/x-schemas/file'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Project'
+  responses:
+        '204':
+          description: success ( no response body )
+        '400':
+          description: bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                     type: object
+                     properties:
+                       message:
+                         type: string
+        '401':
+          description: invalid token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '403':
+          description: not authorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '404':
+          description: not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                     type: object
+                     properties:
+                       message:
+                         type: string
+        '500':
+          description: server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                     type: object
+                     properties:
+                       message:
+                         type: string
+  schemas:
+    Project:
+      type: object
+      properties:
+        _id:  
+          $ref: '#/components/x-schemas/_id'
+        createdAt:  
+          $ref: '#/components/x-schemas/date-time'
+        user:
+          type: object
+          properties:
+            _id:
+              $ref: '#/components/x-schemas/_id-write'
+        updatedAt:  
+          $ref: '#/components/x-schemas/date-time'
+        title:
+          type: string
+        description:
+          type: string
+        requirements:
+          type: array
+          items:
+            type: string
+        faq:
+          type: array
+          items:
+            type: object
+            properties:
+              a:
+               type: string
+              q:
+               type: string
+        isDraft:
+          type: boolean
+        category:
+          type: string
+        subCategory:
+          type: string
+        minPrice:
+          type: number
+        days:
+          type: number
+        priceRange:
+          type: object
+          properties:
+            min:
+              type: number
+            max:
+              type: number
+        showcaseImageURL:
+          $ref: '#/components/x-schemas/url'
+        visualURLs:
+          type: array
+          items:
+            $ref: '#/components/x-schemas/url'
+        currency:
+          type: string
+          readOnly: true
+        deletedAt:
+          $ref: '#/components/x-schemas/date-time'
+      required: [user]
+    User:
+      type: object
+      properties:
+        _id:  
+          $ref: '#/components/x-schemas/_id'
+        provider:
+          type: string
+          example: facebook
+        company:
+          $ref: '#/components/x-schemas/Company'
+        createdAt:
+          $ref: '#/components/x-schemas/date-time'
+        pushSubscriptions:
+          type: array
+          items:
+            type: string
+        emails:
+            type: array
+            items:
+              type: object
+              properties:
+                 address:
+                   type: string
+                   example: john@gmail.com
+                 password:
+                   type: string
+                   example: sd67s5$%%^#EREFDDGH@&#*djh
+                 otp:
+                   type: integer
+                   readOnly: true
+                 otpExpiry:
+                   $ref: '#/components/x-schemas/date-time'
+                 verified:
+                   type: boolean
+                   readOnly: true
+        web3Wallets:
+            type: array
+            items:
+              type: object
+              properties:
+                 provider:
+                   type: string
+                   example: metamask
+                 address:
+                   $ref: '#/components/x-schemas/WalletAddress'
+        settings:
+           $ref: '#/components/x-schemas/Settings'
+        isActive:
+           type: boolean
+        accountType:
+           type: string
+           enum: [online,offline,away]
+           example: agency
+        nonce:
+          type: string
+          readOnly: true
+        deletedAt:
+          $ref: '#/components/x-schemas/date-time'
+        updatedAt:
+          $ref: '#/components/x-schemas/date-time'
+        deactivateUntil:
+          type: number
+  securitySchemes:
+    cookieAuth:        
+      type: apiKey
+      in: cookie
+      name: token
+security:
+  # - authorization: []
+  - cookieAuth: []
+  
+  
+  
+  

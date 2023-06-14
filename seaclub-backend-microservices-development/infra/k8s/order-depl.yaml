@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: order
+  template:
+    metadata:
+      labels:
+        app: order
+    spec:
+      containers:
+        - name: order
+          image: seaclub/order:latest
+          env:
+            - name: MONGO_URI
+              value: 'mongodb://order-mongo-srv:27017/orders'
+            - name: RABBITMQ_URI
+              value: 'amqp://rabbitmq-srv:5672'
+            - name: ACCESS_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: access-token
+                  key: ACCESS_TOKEN
+            - name: SENDGRID_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: sendgrid-api-key
+                  key: SENDGRID_API_KEY
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: order-srv
+spec:
+  selector:
+    app: order
+  ports:
+    - name: order
+      protocol: TCP
+      port: 5001
+      targetPort: 5001

@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: analytic-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: analytic
+  template:
+    metadata:
+      labels:
+        app: analytic
+    spec:
+      containers:
+        - name: analytic
+          image: seaclub/analytic:latest
+          env:
+            - name: ACCESS_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: access-token
+                  key: ACCESS_TOKEN
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: analytic-srv
+spec:
+  selector:
+    app: analytic
+  ports:
+    - name: analytic
+      protocol: TCP
+      port: 5002
+      targetPort: 5002

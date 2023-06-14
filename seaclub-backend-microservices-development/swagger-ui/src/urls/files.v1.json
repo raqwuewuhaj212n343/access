@@ -1,0 +1,468 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "seaclub API",
+    "description": "All of seaclub microservices API definitions",
+    "version": "1.0.0"
+  },
+  "externalDocs": {
+    "description": "Github repository",
+    "url": "https://github.com/Seaclub-Inc/seaclub-backend-microservices.git"
+  },
+  "servers": [
+    {
+      "url": "https://www.seaclub-prod.online/api/v1/"
+    },
+    {
+      "url": "{protocol}://localhost:{port}/api/v1/",
+      "variables": {
+        "port": {
+          "default": "5001"
+        },
+        "protocol": {
+          "enum": [
+            "http",
+            "https"
+          ],
+          "default": "http"
+        }
+      }
+    }
+  ],
+  "tags": [
+    {
+      "name": "files"
+    }
+  ],
+  "paths": {
+    "/files/delete": {
+      "post": {
+        "tags": [
+          "files"
+        ],
+        "summary": "delete a file/s by it's key/s",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "keys": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/files/project": {
+      "post": {
+        "tags": [
+          "files"
+        ],
+        "summary": "upload project files",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "visuals": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/x-schemas/file"
+                    }
+                  },
+                  "showcaseImage": {
+                    "$ref": "#/components/x-schemas/file"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "keys": {
+                      "type": "object",
+                      "properties": {
+                        "visuals": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "showcaseImage": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/files/template": {
+      "post": {
+        "tags": [
+          "files"
+        ],
+        "summary": "upload template files",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/files/company": {
+      "post": {
+        "tags": [
+          "files"
+        ],
+        "summary": "upload company files",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "logo": {
+                    "$ref": "#/components/x-schemas/file"
+                  },
+                  "banner": {
+                    "$ref": "#/components/x-schemas/file"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "keys": {
+                      "type": "object",
+                      "properties": {
+                        "logo": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "banner": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/files/path/{path}": {
+      "get": {
+        "tags": [
+          "files"
+        ],
+        "summary": "get files at path",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "keys": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "isTruncated": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "x-schemas": {
+      "url": {
+        "type": "string",
+        "format": "http",
+        "example": "https://seaclub.item.com"
+      },
+      "file": {
+        "type": "string",
+        "format": "binary"
+      },
+      "_id": {
+        "type": "string",
+        "format": "objectId",
+        "readOnly": true,
+        "example": "507f1f77bcf86cd799439011"
+      },
+      "date-time": {
+        "type": "string",
+        "format": "date-time",
+        "readOnly": true
+      }
+    },
+    "parameters": {
+      "path": {
+        "name": "path",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "templates"
+        }
+      },
+      "page": {
+        "in": "query",
+        "required": true,
+        "name": "page",
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "perPage": {
+        "in": "query",
+        "required": true,
+        "name": "page",
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "search": {
+        "name": "search",
+        "in": "query",
+        "description": "search is done in title or description",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "subscription": {
+        "in": "query",
+        "required": true,
+        "name": "subscription",
+        "schema": {
+          "$ref": "#/components/x-schemas/url"
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "success ( no response body )"
+      },
+      "400": {
+        "description": "bad request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "errors": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "invalid token",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "403": {
+        "description": "not authorized",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "errors": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "server error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "errors": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "cookieAuth": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "token"
+      }
+    }
+  },
+  "security": [
+    {
+      "cookieAuth": []
+    }
+  ]
+}

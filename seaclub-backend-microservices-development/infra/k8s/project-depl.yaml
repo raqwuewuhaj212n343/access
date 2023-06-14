@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: project-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: project
+  template:
+    metadata:
+      labels:
+        app: project
+    spec:
+      containers:
+        - name: project
+          image: seaclub/project:latest
+          env:
+            - name: PORT
+              value: '5003'
+            - name: MONGO_URI
+              value: 'mongodb://project-mongo-srv:27017/projects'
+            - name: RABBITMQ_URI
+              value: 'amqp://rabbitmq-srv:5672'
+            - name: ACCESS_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: access-token
+                  key: ACCESS_TOKEN
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: project-srv
+spec:
+  selector:
+    app: project
+  ports:
+    - name: project
+      protocol: TCP
+      port: 5003
+      targetPort: 5003
