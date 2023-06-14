@@ -1,0 +1,64 @@
+.mainContainer {
+  min-width: 100vw;
+  min-height: 100vh;
+  position: relative;
+}
+.headerText {
+  padding: 8em 10em 3em 10em;
+}
+.headerText textarea {
+  font-family: var(--helvetica-font-family);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 64px;
+  width: 100%;
+  height: 1.5em;
+  outline: none;
+  resize: none;
+  overflow: hidden;
+}
+.headerText textarea:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.bannerImage {
+  width: 100%;
+  height: 40em;
+  object-fit: cover;
+  object-position: center;
+}
+.textContainer {
+  padding: 0 10em;
+}
+.title {
+  outline: none;
+  resize: none;
+  overflow: hidden;
+  font-family: var(--helvetica-font-family);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 55px;
+  height: 1.5em;
+  width: 100%;
+}
+.title:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.titleContainer {
+  border-top: 1px solid #999999;
+  padding: 5em 0 2em 0;
+}
+.message {
+  font-family: var(--helvetica-font-family);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  outline: none;
+  resize: none;
+  overflow: hidden;
+  width: 100%;
+  height: 23em;
+  margin-bottom: 10em;
+}
+.message:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}

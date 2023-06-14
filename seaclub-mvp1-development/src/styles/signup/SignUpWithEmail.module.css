@@ -1,0 +1,80 @@
+.mainContainer {
+  padding: 45px 20px;
+  min-height: 100vh;
+  position: relative;
+}
+.OuterContent {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.mainContent {
+  padding: 0 5rem;
+  width: 52.188rem;
+}
+.inputDiv {
+  margin-bottom: 15px;
+}
+.formContainer {
+  margin-top: 65px;
+}
+.formTitle {
+  font-family: var(--helvetica-font-family);
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 35px;
+  color: var(--secondary);
+  text-align: center;
+  margin-bottom: 25px;
+}
+.bottomText {
+  font-family: var(--helvetica-font-family);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 135.5%;
+  color: var(--secondary);
+  text-align: center;
+  margin: 10px;
+}
+.Login {
+  color: var(--primary);
+}
+.line {
+  width: 100%;
+  height: 1px;
+  background-color: #bfbfbf;
+}
+.divider {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 45px 30px;
+}
+.divider p {
+  font-family: var(--helvetica-font-family);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 135.5%;
+  color: var(--secondary);
+  margin: 0 40px;
+}
+.submitBtn {
+  width: 255px;
+  height: 50px;
+  text-align: center;
+  background-color: black;
+  border-radius: 100px;
+  color: white;
+  font-family: var(--helvetica-font-family);
+
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 29px;
+  margin-top: 45px;
+}

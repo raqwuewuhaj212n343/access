@@ -1,0 +1,26 @@
+.aboutUsContainer {
+  border: 1px solid #e6e6e6;
+  padding: 74px 108px 74px 108px;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+.contentOuter {
+  background: #e6e6e6;
+}
+.textContainer h1 {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 36px;
+  line-height: 53px;
+  padding: 50px 0 50px 30px;
+
+  color: #000000;
+}
+.textContainer p {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 29px;
+  padding: 0px 0 50px 30px;
+  color: #000000;
+}

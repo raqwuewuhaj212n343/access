@@ -1,0 +1,74 @@
+.poppupInput {
+	box-sizing: border-box;
+	padding: 0px 0px 0px 30px;
+	gap: 6px;
+	width: 419px;
+	height: 64px;
+	border: 1px solid #E6E6E6;
+	border-radius: 100px;
+	margin-bottom: '45px';
+	z-index: 5;
+	background: transparent;
+
+}
+
+.poppupInputIcon {
+	margin-left: -114px;
+	height: 64px;
+
+
+}
+
+.inputpreviewicon {
+	width: 65px;
+	text-align: center;
+	border-radius: 30px 0 0 30px;
+	margin-right: -25px;
+	z-index: 9;
+	display: flex;
+	color: blue;
+	flex-direction: column;
+	align-items: center;
+	height: 50px;
+	justify-content: center;
+	background: #e6e8f6;
+}
+
+.goBackBtn {
+	display: flex;
+	gap: 15px;
+	flex-direction: column;
+	width: fit-content;
+	align-items: center;
+	position: absolute;
+	left: 53px;
+	top: 118px;
+}
+
+.goBackBtn span {
+	font-weight: 500;
+}
+
+.editBtn {
+	width: 135px;
+	height: 44px;
+}
+
+.priceRangeContainer {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+}
+
+.campanyBio {
+	margin-left: 245px;
+	font-weight: 500;
+}
+
+.cartDownImg {
+	margin-left: -39px;
+	background: white;
+	width: 34px;
+	margin-top: -21px;
+}

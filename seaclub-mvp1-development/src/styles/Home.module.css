@@ -1,0 +1,76 @@
+/*This style while only apply to The GobackButton Component */
+
+
+.goback_button {
+  width: 2.81em;
+  height: 1.25em;
+  background-color: black;
+  border-radius: 81px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.previous_page_button_label {
+  font-family: var(--suisse-font-family);
+  font-size: 1em;
+}
+/*End of the styling for the GobackButton Component */
+
+/* Styling for the LogoWithDescriptionLabel component */
+.logo {
+  width: 14.81em;
+  height: 11.31em;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+}
+.description {
+  font-family: var(--helvetica-font-family);
+  font-size: 1.5em;
+  width: 14em;
+  text-align: center;
+}
+/*End of the styling for the LogoWithDescriptionLabel Component */
+
+/* Styling for the SocialMediaContainer component */
+
+.social_media_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.social_media {
+  width: 20.37em;
+  height: 5em;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-top: 1.25em;
+}
+.social_media_button {
+  width: 5em;
+  height: 5em;
+  border-radius: 100%;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1.25em;
+  border: 0.86px solid #e6e6e6;
+  filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.25));
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.social_media_button:hover {
+  opacity: 0.7;
+}
+.social_media_logo {
+  width: 2em;
+  height: 2em;
+}
+/*End of the styling for the SocialMediaContainer Component */
+.main {
+  height: 100vh;
+}

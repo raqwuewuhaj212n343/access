@@ -1,0 +1,95 @@
+/* .firsttmpltCard {
+  padding: 20px;
+  border-radius: 6px;
+  background: white;
+  width: 100%;
+  position: relative;
+  height: fit-content;
+  border: 1px solid red;
+} */
+
+.mainContainer {
+  min-width: 100vw;
+  min-height: 100vh;
+  position: absolute;
+}
+
+.container {
+  margin-top: 7em;
+  padding: 0 5em;
+}
+.bannerImage {
+  width: 100%;
+  height: 30em;
+  object-fit: cover;
+}
+.bannerContainer {
+  position: relative;
+}
+.bannerTitle {
+  position: absolute;
+  background-color: black;
+  height: 20em;
+  width: 50em;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bannerTitle textarea {
+  outline: none;
+  resize: none;
+  overflow: hidden;
+  background-color: transparent;
+  width: 144.88px;
+  height: 30px;
+  font-weight: 500;
+  font-size: 2em;
+  /* line-height: 15px; */
+  color: #fff;
+  text-align: center;
+  width: 50%;
+  height: 30%;
+}
+.bannerTitle textarea:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.subTitle {
+  margin-top: 16em;
+  margin-bottom: 5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.subTitle textarea {
+  font-size: 25px;
+  font-weight: 500;
+  text-align: center;
+  outline: none;
+  resize: none;
+  overflow: hidden;
+  background-color: transparent;
+  width: 30em;
+}
+.subTitle textarea:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.cardMessage {
+  margin-top: 5em;
+}
+.cardMessage textarea {
+  outline: none;
+  resize: none;
+  overflow: hidden;
+  background-color: transparent;
+  width: 100%;
+  font-size: 25px;
+  font-weight: 500;
+  text-align: center;
+  padding: 0 1em;
+  height: 5em;
+}
+.cardMessage textarea:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}

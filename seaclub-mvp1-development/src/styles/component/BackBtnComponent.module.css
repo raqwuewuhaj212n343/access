@@ -1,0 +1,30 @@
+.backBtnContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 10px;
+  width: 122px;
+  height: 97px;
+}
+.arrowBtn {
+  background-color: black;
+  width: 45px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 81px;
+  cursor: pointer;
+}
+.backBtnContainer p {
+  font-family: var(--suisse-font-family);
+  text-transform: uppercase;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 100%;
+  margin: 10px;
+  color: black;
+}

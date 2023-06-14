@@ -1,0 +1,37 @@
+.modalContainer {
+  background-color: black;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 48.3721px;
+  gap: 37.49px;
+}
+.title {
+  color: white;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 47px;
+  text-align: center;
+}
+.modalBtn p {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 29px;
+}
+.modalBtn {
+  background: #ffffff;
+  border-radius: 100px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 19px;
+  height: 85px;
+
+  cursor: pointer;
+}

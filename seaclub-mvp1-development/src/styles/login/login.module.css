@@ -1,0 +1,150 @@
+.login {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+}
+
+.login_form {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 52.12em;
+  height: 55.25em;
+  margin-top: 2.52em;
+}
+.login_inputs {
+  margin-top: 5.43em;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 42.06em;
+  height: 22.43em;
+}
+.connect_with_us_span {
+  font-size: 1em;
+  font-family: var(--helvetica-regular-font-family);
+  color: var(--cimen-color);
+  font-weight: 300;
+  text-align: left;
+  line-height: 2.18em;
+}
+.continue_with_email_button {
+  margin-top: 1.31em;
+  width: 36.93em;
+  height: 4.87em;
+  border-radius: 6.25em;
+  border: none;
+  background-color: white;
+  filter: drop-shadow(0px 4px 9px rgba(0, 0, 0, 0.25));
+  font-size: 1.125em;
+  font-family: var(--helvetica-regular-font-family);
+  line-height: 1.52em;
+  transition: all 0.1s ease-in-out;
+  font-weight: 300;
+}
+.continue_with_email_button:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+.or_separator {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin-top: 1.31em;
+  width: 100%;
+  color: var(--cimen-light-color);
+  font-family: var(--helvetica-font-family);
+  font-size: 1em;
+}
+
+.or_separator::before,
+.or_separator::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid var(--separator-color);
+}
+
+.or_separator:not(:empty)::before {
+  margin-right: 2.18em;
+}
+
+.or_separator:not(:empty)::after {
+  margin-left: 2.18em;
+}
+.continue_with_wallet_button {
+  margin-top: 1.31em;
+  width: 36.93em;
+  height: 4.87em;
+  border-radius: 6.25em;
+  border: none;
+  background-color: white;
+  filter: drop-shadow(0px 4px 9px rgba(0, 0, 0, 0.25));
+  font-size: 1.125em;
+  font-family: var(--helvetica-regular-font-family);
+  line-height: 1.52em;
+  background-color: black;
+  color: white;
+  font-weight: 300;
+  transition: all 0.1s ease-in-out;
+}
+.continue_with_wallet_button:hover {
+  opacity: 0.8;
+  filter: drop-shadow(0px 4px 9px rgba(0, 0, 0, 0.25));
+  cursor: pointer;
+}
+.go_to_registerPage {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 1.31em;
+  padding: 0.62em;
+  gap: 0.62em;
+  width: 20.62em;
+  height: 2.62em;
+  font-size: 1em;
+  font-family: var(--helvetica-font-family);
+  line-height: 135.5%;
+  text-align: left;
+}
+.go_to_registerPage > span:first-child {
+  color: var(--cimen-color);
+}
+.register_now_link {
+  color: var(--keinBlue-color);
+}
+.log_into_social_media {
+  margin-top: 1em;
+  width: 42.06em;
+  display: flex;
+  flex-direction: column;
+}
+.or_connect_with_separator {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin-top: 1em;
+  color: var(--cimen-light-color);
+  font-family: var(--helvetica-font-family);
+  font-size: 1em;
+}
+
+.or_connect_with_separator::before,
+.or_connect_with_separator::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid var(--separator-color);
+}
+
+.or_connect_with_separator:not(:empty)::before {
+  margin-right: 0.96em;
+}
+
+.or_connect_with_separator:not(:empty)::after {
+  margin-left: 0.96em;
+}
+.social_media_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

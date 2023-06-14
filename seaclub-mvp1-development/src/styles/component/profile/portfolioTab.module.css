@@ -1,0 +1,74 @@
+.portfolioContainer textarea {
+  outline: none;
+  resize: none;
+  overflow: hidden;
+}
+.portfolioContainer {
+  background: #ffffff;
+  border: 1px solid #e6e6e6;
+  border-radius: 20px;
+  padding: 100px 137px;
+  margin-top: 25px;
+  position: relative;
+}
+.whiteBox {
+  position: absolute;
+  width: 430px;
+  height: 230px;
+  background-color: white;
+  border: 1 px solid red;
+  z-index: 100;
+  top: 50%;
+  left: 50px;
+  transform: translateY(-50%);
+  padding: 0 35px;
+  display: flex;
+  align-items: center;
+}
+.shortInfo {
+  margin-top: 50px;
+  margin-bottom: 80px;
+  width: 80%;
+  height: 100px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 35px;
+  padding: 10px;
+}
+.boxText {
+  width: 100%;
+  height: 50%;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 29px;
+}
+.footerContainer {
+  margin-top: 150px;
+  width: 100%;
+  background-color: black;
+  color: white;
+  height: 330px;
+  display: flex;
+  align-items: center;
+  padding: 115px;
+}
+.footerText {
+  background: transparent;
+  width: 100%;
+  text-align: center;
+  height: 110px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 59px;
+}
+.title {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 59px;
+  width: 100%;
+  height: 60px;
+}

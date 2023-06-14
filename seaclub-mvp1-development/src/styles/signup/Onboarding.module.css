@@ -1,0 +1,106 @@
+.landingPageContainer {
+  padding: 45px 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.middleDiv {
+  margin: 18px 0;
+}
+.middleDiv h2 {
+  font-family: var(--helvetica-font-family);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 35px;
+  margin: 10px;
+  text-align: center;
+  color: var(--secondary);
+}
+.selectUserType {
+  display: flex;
+  gap: 50px;
+  margin-bottom: 35px;
+}
+.selectTypeOuter {
+  width: 203px;
+  height: 276px;
+  border: 1px solid #e6e6e6;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.selectTypeOuter h3 {
+  font-family: var(--helvetica-font-family);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 29px;
+  color: #000000;
+  margin: 20px;
+}
+.selectLogoContainer {
+  height: 121px;
+  width: 121px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+.clientBg {
+  background: url("../../../public/assets/sign-up/images/clientBg.svg");
+  background-repeat: no-repeat;
+}
+.providerBg {
+  background: url("../../../public/assets/sign-up/images/providerBg.svg");
+  background-repeat: no-repeat;
+}
+.optionTitle {
+  font-family: var(--helvetica-font-family);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--secondary);
+  margin-bottom: 15px;
+}
+.optionContainer {
+  height: 45px;
+  width: 100%;
+  border: 1px solid #e6e6e6;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.optionContainer p {
+  font-family: var(--helvetica-font-family);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  margin-left: 30px;
+}
+.optionBtnCircle {
+  height: 20px;
+  width: 20px;
+  border: 2px solid black;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+.optionBtnFill {
+  height: 20px;
+  width: 20px;
+  background-color: #000000;
+  border-radius: 50%;
+  margin-right: 12px;
+}

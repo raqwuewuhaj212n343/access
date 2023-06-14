@@ -1,0 +1,35 @@
+.teamContainer {
+  background: #ffffff;
+  border: 1px solid #e6e6e6;
+  border-radius: 20px;
+  margin-top: 25px;
+  padding: 124px 60px;
+  position: relative;
+}
+.teamContainer textarea {
+  outline: none;
+  resize: none;
+  overflow: hidden;
+}
+.teamContainer h1 {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 53px;
+  text-align: center;
+}
+.subTitleContainer textarea {
+  width: 698px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 29px;
+  text-align: center;
+}
+.subTitleContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 55px;
+  margin-bottom: 170px;
+}

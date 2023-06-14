@@ -1,0 +1,27 @@
+.topLogoContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.topLogoContainer h2 {
+  font-family: var(--helvetica-font-family);
+  font-style: normal;
+  font-weight: 500;
+  color: #000000;
+  margin: 10px;
+}
+.bigFont {
+  font-size: 32px;
+  line-height: 47px;
+}
+.smallFont {
+  font-size: 24px;
+  line-height: 35px;
+}
+.bigGap {
+  margin-bottom: 30px;
+}
+.smallGap {
+  margin-bottom: 10px;
+}

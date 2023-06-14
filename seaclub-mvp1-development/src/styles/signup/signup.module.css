@@ -1,0 +1,82 @@
+.main {
+  padding: 45px 20px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.signUpContent {
+  padding: 0px 80px;
+  width: 835px;
+}
+.socialContainer {
+  margin: 70px 0;
+}
+.socialContainer h3 {
+  font-family: var(--helvetica-font-family), sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 35px;
+  color: var(--secondary);
+  margin: 10px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.btnStyle {
+  height: 80px;
+  width: 100%;
+  border-radius: 100px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.btnStyle p {
+  font-family: var(--helvetica-font-family), sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 135.5%;
+}
+.btnColor {
+  background-color: black;
+  color: white;
+  margin-bottom: 20px;
+}
+.line {
+  width: 100%;
+  height: 1px;
+  background-color: #bfbfbf;
+}
+.divider {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+}
+.divider p {
+  font-family: var(--helvetica-font-family);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 135.5%;
+  color: #707070;
+  margin: 0 40px;
+}
+.lastText {
+  font-family: var(--helvetica-font-family);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 135.5%;
+  color: var(--secondary);
+  text-align: center;
+  margin: 10px;
+}
+.loginText {
+  color: var(--primary);
+}

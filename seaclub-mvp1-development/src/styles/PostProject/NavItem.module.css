@@ -1,0 +1,47 @@
+@font-face {
+	font-family: 'Suisse Intl Mono';
+	src: url('../../../public/fonts/SuisseIntlMono-Regular.otf') format('opentype');
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	padding: 1.5rem 3rem 2.25rem 1.5rem;
+	gap: 1rem;
+	font-family: 'Suisse Intl Mono';
+	background-color: #0320f8;
+	border-radius: 20px;
+}
+
+.container h3 {
+	color: #ffffff;
+	font-size: 1rem;
+	margin-bottom: 23px;
+}
+
+.clicked {
+	color: #ffffff;
+	background-color: #e6e8f6;
+}
+
+.clicked h3 {
+	color: #0320f8;
+}
+
+.title {
+	font-size: 1.25rem;
+	font-weight: 400;
+	max-width: 207px;
+}
+
+.number {
+	font-size: 1.6rem;
+	font-weight: 400;
+}
+
+.textcontainer {
+	width: 231px;
+	height: 76px;
+	text-transform: uppercase;
+	color: #FFFFFF;
+}

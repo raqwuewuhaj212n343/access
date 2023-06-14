@@ -1,0 +1,38 @@
+.textContainer {
+  position: relative;
+  width: 100%;
+  background: #e6e6e6;
+  margin-top: 25px;
+}
+.textContainerSmall {
+  height: 90px;
+}
+.textContainerBig {
+  height: 190px;
+}
+.textarea {
+  background-color: transparent;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  text-align: center;
+}
+.smallFont {
+  height: 30%;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+}
+.bigFont {
+  height: 50%;
+  padding: 0 40px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 29px;
+}
+.cardImage {
+  width: 100%;
+}

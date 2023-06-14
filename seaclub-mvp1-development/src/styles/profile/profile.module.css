@@ -1,0 +1,260 @@
+.profilePageContainer {
+  padding: 1.563em 0.938em 1.875em 1.25em;
+  background: #f7f8fa;
+}
+.editContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.editContainer p {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 22px;
+  padding: 10px;
+  color: #999999;
+}
+
+.imageContainer {
+  width: 100%;
+  height: 400px;
+}
+.tab h4 {
+  color: #999999;
+}
+.tab {
+  border: 1px solid #e6e6e6;
+  border-bottom-width: 0;
+  position: relative;
+  background-color: #e6e6e6;
+}
+.tab::before {
+  content: "";
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: #f7f8fa;
+  z-index: 1;
+  bottom: 0;
+  right: -15px;
+  border-radius: 0 0 0 100%;
+  border: 1px solid #e6e6e6;
+  border-top: 0;
+  border-right: 0;
+}
+.tab::after {
+  content: "";
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: #e6e6e6;
+
+  bottom: 0;
+  right: -15px;
+}
+.activeTab h4 {
+  color: #000000;
+}
+.activeTab {
+  border: 1px solid #e6e6e6;
+  border-bottom-width: 0;
+  position: relative;
+  background-color: white;
+}
+.activeTab::before {
+  content: "";
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: #f7f8fa;
+  z-index: 1;
+  bottom: 0;
+  right: -15px;
+  border-radius: 0 0 0 100%;
+  border: 1px solid #e6e6e6;
+  border-top: 0;
+  border-right: 0;
+}
+.activeTab::after {
+  content: "";
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: white;
+
+  bottom: 0;
+  right: -15px;
+}
+.ProjectOuter {
+  border-radius: 0px 20px 20px 20px;
+
+  border: 1px solid #e6e6e6;
+}
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+
+  width: 192px;
+  height: 50px;
+  color: white;
+  background: #000000;
+  border-radius: 100px;
+}
+.chartContainer {
+  background: #ffffff;
+  padding: 24px 24px 22px 24px;
+  border: 1px solid #e6e6e6;
+  border-radius: 20px;
+}
+.chartTitle {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+  color: #999999;
+  padding: 10px;
+}
+.chartInput {
+  width: 100%;
+  height: 38px;
+  outline: none;
+  border: 0.86px solid #e6e6e6;
+  border-radius: 100px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: #999999;
+  padding-left: 127px;
+}
+.ChartInputLabel {
+  position: absolute;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 107px;
+  background: #e6e8f6;
+  /* Secondary */
+
+  border-right: 1px solid #e6e6e6;
+  border-radius: 100px 0px 0px 100px;
+}
+.ChartInputLabel p {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: #000000;
+}
+.languagesContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0px 20px;
+  gap: 7px;
+  width: 140px;
+  height: 124px;
+  background: #ffffff;
+  border: 1px solid #ffffff;
+  border-radius: 8px;
+  display: none;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+.languagesContainer li {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: #999999;
+  width: 100%;
+  cursor: pointer;
+}
+.hoverInputContainer {
+  position: relative;
+}
+.hoverInputContainer:hover + .languagesContainer,
+.languagesContainer:hover {
+  display: block;
+}
+.addBtnElement p {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 26px;
+}
+.addBtnElement p {
+  color: white;
+}
+.addBtnElement {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px 20px;
+  gap: 10px;
+  height: 52px;
+  background: #000000;
+  color: white;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25),
+    inset 0px 2px 4px rgba(255, 255, 255, 0.25);
+  border-radius: 100px;
+  position: fixed;
+  z-index: 10;
+  cursor: pointer;
+}
+.top {
+  bottom: 150px;
+  right: 90px;
+}
+.middle {
+  bottom: 80px;
+  right: 110px;
+}
+.bottom {
+  bottom: 10px;
+  right: 90px;
+}
+.tooltip p {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 26px;
+  color: #ffffff;
+}
+.tooltip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  background: #000000;
+  border-radius: 100px;
+  position: absolute;
+  top: 0;
+  left: 70px;
+  z-index: 10;
+  display: none;
+  white-space: nowrap;
+}
+.sidebarIcon:hover + .tooltip {
+  display: block;
+}
+.floatingBtn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 70px;
+  height: 70px;
+  background: #000000;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+  border-radius: 81px;
+}
